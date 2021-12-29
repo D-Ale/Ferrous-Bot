@@ -1,10 +1,10 @@
 /** @format */
 
 const Client = require("./Client.js");
+const Discord = require("discord.js");
 
 /**
- *
- * @param {string} message
+ * @param {Discord.Message} message
  * @param {string[]} args
  * @param {Client} client
  */

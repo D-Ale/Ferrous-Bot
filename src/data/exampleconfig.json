@@ -1,6 +1,9 @@
 {
   "prefix": "!",
   "clientOptions": {
+    "allowedMentions": {
+      "repliedUser": false
+    },
     "intents": [
       "GUILDS",
       "GUILD_MESSAGES"
