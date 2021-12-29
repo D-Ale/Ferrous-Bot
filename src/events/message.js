@@ -17,8 +17,8 @@ module.exports = new Event("messageCreate", (client, message) => {
   // get the command.
   const command = client.commands.find(
     c =>
-      c.name.toLowerCase() ===
-      cmd.toLowerCase() /* || c.aliases.map(v => v.toLowerCase()).includes(cmd.toLowerCase()) */
+      c.name.toLowerCase() === cmd.toLowerCase() ||
+      c.aliases.map(v => v.toLowerCase()).includes(cmd.toLowerCase())
   );
 
   // stop if the command doesn't exist.

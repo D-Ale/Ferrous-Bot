@@ -13,9 +13,10 @@ class Command {
   /**
    * @param {string} name
    * @param {string} description
+   * @param {string[]} aliases
    * @param {RunFunction} run
    */
-  constructor(name, description, run) {
+  constructor(name, description, aliases, run) {
     /**
      * @type {string}
      */
@@ -24,6 +25,10 @@ class Command {
      * @type {string}
      */
     this.description = description;
+    /**
+     * @type {string[]}
+     */
+    this.aliases = aliases;
     /**
      * @type {RunFunction}
      */
