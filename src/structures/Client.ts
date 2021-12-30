@@ -1,6 +1,6 @@
 /** @format */
 
-const Discord = require("discord.js");
+import { ClientOptions, Client } from 'discord.js'
 
 const Command = require("./Command.js");
 
@@ -10,25 +10,18 @@ const fs = require("fs");
 
 const path = require("path");
 
-class Client extends Discord.Client {
-  /**
-   * @typedef {{prefix: string, clientOptions: Discord.ClientOptions}} Config
-   * @param {Config} config
-   * @param {token} token
-   */
-  constructor(config, token) {
+interface Config {
+   prefix: string;
+   clientOptions: ClientOptions
+}
+
+class FeroClient extends Client {
+  constructor(config: Config, token: string) {
     super(config.clientOptions);
 
-    /**
-     * @type {Config}
-     */
     this.config = config;
 
-    // commands collection
-    /**
-     * @type {Discord.Collection<string, Command>}
-     */
-    this.commands = new Discord.Collection();
+    this.commands: Collection<string, Command> = Collection();
 
     this.reload(token);
   }
