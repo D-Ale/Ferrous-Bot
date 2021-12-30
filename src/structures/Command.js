@@ -1,39 +1,17 @@
 /** @format */
 
-const Client = require("./Client.js");
-const Discord = require("discord.js");
+import { Client } from './Client.ts'
+import { Message } from 'discord.js'
 
-/**
- * @param {Discord.Message} message
- * @param {string[]} args
- * @param {Client} client
- */
-function RunFunction(message, args, client) {}
+function RunFunction(message: Message, args: string[], client: Client) {}
 class Command {
-  /**
-   * @param {string} name
-   * @param {string} description
-   * @param {string[]} aliases
-   * @param {RunFunction} run
-   */
-  constructor(name, description, aliases, run) {
-    /**
-     * @type {string}
-     */
+  constructor(name: string, description: string, aliases: string[], run: RunFunction) {
+   
     this.name = name;
-    /**
-     * @type {string}
-     */
     this.description = description;
-    /**
-     * @type {string[]}
-     */
     this.aliases = aliases;
-    /**
-     * @type {RunFunction}
-     */
     this.run = run;
   }
 }
 
-module.exports = Command;
+export Command
