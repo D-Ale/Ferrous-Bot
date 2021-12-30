@@ -3,7 +3,13 @@
 import { Client } from './Client.ts'
 import { Message } from 'discord.js'
 
-function RunFunction(message: Message, args: string[], client: Client) {}
+interface runOptions {
+  message: Message,
+  client: Client,
+  args: string[]
+}
+
+function RunFunction(options: runOptions) {}
 class Command {
   constructor(name: string, description: string, aliases: string[], run: RunFunction) {
    
