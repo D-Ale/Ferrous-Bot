@@ -6,16 +6,15 @@ import { Command, CommandType } from "./Command";
 
 import { Event } from "./Event";
 
-import { readdirSync } from 'fs'
+import { readdirSync } from "fs";
 
-import * as path from 'path'
+import * as path from "path";
 
 interface Config {
-  prefix: string,
-  clientOptions: ClientOptions
+  prefix: string;
+  clientOptions: ClientOptions;
 }
 export class FeroClient extends Client {
-  
   constructor(config: Config, token: string) {
     super(config.clientOptions);
 
@@ -25,8 +24,8 @@ export class FeroClient extends Client {
 
     this.reload(token);
   }
-    config
-    commands: Collection<string, CommandType>
+  config;
+  commands: Collection<string, CommandType>;
   async reload(token: string) {
     // command and event handlers
 
@@ -34,7 +33,12 @@ export class FeroClient extends Client {
     readdirSync("./src/commands")
       .filter(file => path.extname(file) === ".ts")
       .forEach(file => {
-        const cmd: CommandType = require(path.join(process.cwd(), "src", "commands", file.replace('.ts', '')));
+        const cmd: CommandType = require(path.join(
+          process.cwd(),
+          "src",
+          "commands",
+          file.replace(".ts", "")
+        ));
 
         this.commands.set(cmd.name, cmd);
 
@@ -45,7 +49,12 @@ export class FeroClient extends Client {
     readdirSync("./src/events")
       .filter(file => path.extname(file) === ".ts")
       .forEach(file => {
-        const event: Event<keyof ClientEvents> = require(path.join(process.cwd(), "src", "events", file.replace('.ts', '')));
+        const event: Event<keyof ClientEvents> = require(path.join(
+          process.cwd(),
+          "src",
+          "events",
+          file.replace(".ts", "")
+        ));
 
         this.on(event.event, event.run.bind(null, this));
 

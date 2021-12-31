@@ -1,8 +1,8 @@
 /** @format */
 
-import { Event } from '../structures/Event'
+import { Event } from "../structures/Event";
 
-export default new Event('messageCreate', (client, message) => {
+export default new Event("messageCreate", (client, message) => {
   // stop if this message is the bot's message.
   if (message.author.bot) return;
 
@@ -18,7 +18,9 @@ export default new Event('messageCreate', (client, message) => {
   const command = client.commands.find(
     c =>
       c.name.toLowerCase() === cmd.toLowerCase() ||
-      (c.aliases as string[]).map(v => v.toLowerCase()).includes(cmd.toLowerCase())
+      (c.aliases as string[])
+        .map(v => v.toLowerCase())
+        .includes(cmd.toLowerCase())
   );
 
   // stop if the command doesn't exist.
@@ -27,5 +29,5 @@ export default new Event('messageCreate', (client, message) => {
   // permissions check
 
   // run the command.
-  command.run({ args, message, client});
-})
+  command.run({ args, message, client });
+});
