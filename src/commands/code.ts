@@ -1,24 +1,23 @@
 /** @format */
-
-const Command = require("../structures/Command.js");
+import { MessageAttachment } from "discord.js";
+import { Command } from "../structures/Command"
 const {
   default: { get }
 } = require("axios");
-
-module.exports = new Command(
-  "code",
-  "Beautify your code to send here!",
-  ["c"],
-  async (message, args, client) => {
+export default new Command({ 
+  name: "code",
+  description: "Beautify your code to send here!",
+  aliases: ["c"],
+  run: async ({message, args, client}) => {
     const language = args[0] || "js";
-
     let code = args.slice(1).join(" ");
 
     if (!code) {
       if (!message.attachments.first())
         return message.reply("You must provide code!");
-
-      code = (await get(message.attachments.first().url)).data;
+      if (message.attachments){
+        code = (await get((message.attachments.first() as MessageAttachment).url)).data;
+      }
     }
 
     const msg = `Code for ${message.member}:\n\`\`\`${language}\n${code}\`\`\``;
@@ -27,4 +26,4 @@ module.exports = new Command(
 
     message.channel.send(msg);
   }
-);
+})

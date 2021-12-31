@@ -1,4 +1,4 @@
-          mn mmn/** @format */
+/** @format */
 
 import { FeroClient } from './Client'
 import { Message } from 'discord.js'
@@ -14,7 +14,7 @@ type RunFunction = (options: RunOptions) => any;
 export type CommandType = {
   name: string;
   description?: string;
-  aliases?: string[],
+  aliases?: string[] | [],
   run: RunFunction
 }
 

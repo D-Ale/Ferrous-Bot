@@ -1,8 +1,8 @@
 /** @format */
 
-const Event = require("../structures/Event.js");
+import { Event } from '../structures/Event'
 
-module.exports = new Event("messageCreate", (client, message) => {
+export default new Event('messageCreate', (client, message) => {
   // stop if this message is the bot's message.
   if (message.author.bot) return;
 
@@ -18,7 +18,7 @@ module.exports = new Event("messageCreate", (client, message) => {
   const command = client.commands.find(
     c =>
       c.name.toLowerCase() === cmd.toLowerCase() ||
-      c.aliases.map(v => v.toLowerCase()).includes(cmd.toLowerCase())
+      (c.aliases as string[]).map(v => v.toLowerCase()).includes(cmd.toLowerCase())
   );
 
   // stop if the command doesn't exist.
@@ -27,5 +27,5 @@ module.exports = new Event("messageCreate", (client, message) => {
   // permissions check
 
   // run the command.
-  command.run(message, args, client);
-});
+  command.run({ args, message, client});
+})

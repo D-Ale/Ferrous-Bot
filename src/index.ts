@@ -2,17 +2,12 @@
 
 console.clear();
 
-const Client = require("./structures/Client.js");
+import { FeroClient } from "./structures/Client";
+import { config } from "dotenv";
+import { existsSync, copyFileSync } from 'fs'
+config()
+if (!process.env.token) throw new Error("You must put a token!")
 
-const { existsSync, copyFileSync, writeFileSync } = require("fs");
-
-const { config } = require("dotenv");
-
-if (!existsSync("./.env")) {
-  writeFileSync("./.env", "TOKEN = ");
-}
-
-config();
 
 if (!existsSync("./src/data/config.json")) {
   copyFileSync("./src/data/exampleconfig.json", "./src/data/config.json");
@@ -20,8 +15,8 @@ if (!existsSync("./src/data/config.json")) {
   console.log("config.json not found, made one for you");
 }
 
-const clientConfig = require("./data/config.json");
+import clientConfig from './data/config.json'
 
-const client = new Client(clientConfig, process.env.TOKEN);
+const client = new FeroClient(clientConfig, process.env.TOKEN);
 
-module.exports = client;
+export default client
